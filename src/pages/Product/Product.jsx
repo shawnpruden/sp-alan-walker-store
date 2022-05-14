@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -21,10 +21,11 @@ import {
 import { loader, Select } from '../Products/styles';
 import { Box, CircularProgress } from '@mui/material';
 
-function Product({ products }) {
+function Product({ products, onAddToCart }) {
+  const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
 
-  const { assets, name, price } =
+  const { id, assets, name, price } =
     products.length !== 0
       ? products.find((product) => product.id === productId)
       : [];
@@ -51,7 +52,10 @@ function Product({ products }) {
             </Filter>
             <Filter>
               <Label htmlFor="quantity">Quantity</Label>
-              <Select id="quantity">
+              <Select
+                id="quantity"
+                onChange={(e) => setQuantity(e.target.value)}
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -64,7 +68,9 @@ function Product({ products }) {
             </Filter>
 
             <ButtonGroup>
-              <Button>Add to cart</Button>
+              <Button onClick={() => onAddToCart(id, quantity)}>
+                Add to cart
+              </Button>
               <Icon>
                 <FavoriteBorderIcon />
               </Icon>

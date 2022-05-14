@@ -23,7 +23,7 @@ import {
   loader,
 } from './styles';
 
-function Products({ products }) {
+function Products({ products, onAddToCart }) {
   const { collection } = useParams();
 
   const categorizedProducts = products.filter(
@@ -71,10 +71,19 @@ function Products({ products }) {
                   }}
                 />
                 <Icons>
-                  <Icon>
+                  <Icon
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onAddToCart(id, 1);
+                    }}
+                  >
                     <AddShoppingCartIcon fontSize="small" />
                   </Icon>
-                  <Icon>
+                  <Icon
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
                     <FavoriteBorderIcon fontSize="small" />
                   </Icon>
                 </Icons>

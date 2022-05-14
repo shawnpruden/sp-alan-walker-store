@@ -17,7 +17,7 @@ import {
 import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ totalItems }) {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <>
@@ -40,7 +40,7 @@ function Header() {
         <Right>
           <HeaderItem>Sign Up</HeaderItem>
           <HeaderItem>
-            <Badge badgeContent={4} color="error">
+            <Badge badgeContent={totalItems} color="error">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </HeaderItem>
