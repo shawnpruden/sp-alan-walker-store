@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
   height: 150px;
@@ -77,9 +78,9 @@ export const Right = styled.div`
   flex: 1;
 `;
 
-export const HeaderItem = styled.div`
+export const HeaderLink = styled(Link)`
   font-size: 1rem;
-  cursor: pointer;
+  color: #fff;
 
   margin-left: 1.5rem;
 `;

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+
 import { Badge } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
 import {
   Center,
   Container,
+  HeaderLink,
   Input,
   Language,
   Left,
   Logo,
-  HeaderItem,
   Right,
   SearchBar,
 } from './styles';
@@ -19,6 +21,7 @@ import { Link } from 'react-router-dom';
 
 function Header({ totalItems }) {
   const [isFocused, setIsFocused] = useState(false);
+
   return (
     <>
       <Container>
@@ -38,12 +41,12 @@ function Header({ totalItems }) {
           </Link>
         </Center>
         <Right>
-          <HeaderItem>Sign Up</HeaderItem>
-          <HeaderItem>
+          <HeaderLink to="/cart">Sign Up</HeaderLink>
+          <HeaderLink to="/cart">
             <Badge badgeContent={totalItems} color="error">
               <ShoppingCartOutlinedIcon />
             </Badge>
-          </HeaderItem>
+          </HeaderLink>
         </Right>
       </Container>
     </>

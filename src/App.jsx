@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 import { Announcement, Footer, Header, Navbar } from './components';
-import { Home, Product, Products } from './pages';
+import { Cart, Home, Product, Products } from './pages';
 
 import { theme } from './styles';
 
@@ -23,8 +23,8 @@ const App = () => {
     setCart(await commerce.cart.retrieve());
   };
 
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
+  const handleAddToCart = async (productId, quantity, variant) => {
+    const item = await commerce.cart.add(productId, quantity, variant);
 
     setCart(item.cart);
   };
@@ -34,7 +34,8 @@ const App = () => {
     fetchCart();
   }, []);
 
-  console.log(cart);
+  console.log('product log', products);
+  console.log('cart log', cart);
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,6 +58,7 @@ const App = () => {
             <Product products={products} onAddToCart={handleAddToCart} />
           }
         />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
 
       <Footer />

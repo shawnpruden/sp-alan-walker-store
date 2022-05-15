@@ -23,12 +23,16 @@ import { Box, CircularProgress } from '@mui/material';
 
 function Product({ products, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState({});
+
   const { productId } = useParams();
 
-  const { id, assets, name, price } =
+  const { id, assets, name, price, variant_groups } =
     products.length !== 0
       ? products.find((product) => product.id === productId)
       : [];
+
+  console.log('size', size);
 
   return (
     <>
@@ -41,15 +45,23 @@ function Product({ products, onAddToCart }) {
           <Right>
             <Title>{name}</Title>
             <Price>{price.formatted_with_symbol}</Price>
-            <Filter>
-              <Label htmlFor="size">Size</Label>
-              <Select id="size">
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-              </Select>
-            </Filter>
+            {variant_groups.length === 0 ? null : (
+              <Filter>
+                <Label htmlFor="size">Size</Label>
+                <Select
+                  id="size"
+                  onChange={(e) =>
+                    setSize({ [variant_groups[0].id]: e.target.value })
+                  }
+                >
+                  {variant_groups[0].options.map((option) => (
+                    <option value={option.id} key={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Select>
+              </Filter>
+            )}
             <Filter>
               <Label htmlFor="quantity">Quantity</Label>
               <Select
@@ -68,7 +80,7 @@ function Product({ products, onAddToCart }) {
             </Filter>
 
             <ButtonGroup>
-              <Button onClick={() => onAddToCart(id, quantity)}>
+              <Button onClick={() => onAddToCart(id, quantity, size)}>
                 Add to cart
               </Button>
               <Icon>

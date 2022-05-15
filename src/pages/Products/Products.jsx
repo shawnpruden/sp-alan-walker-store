@@ -22,6 +22,7 @@ import {
   Title,
   loader,
 } from './styles';
+import PopperOver from '../../components/PopperOver/PopperOver';
 
 function Products({ products, onAddToCart }) {
   const { collection } = useParams();
@@ -57,43 +58,53 @@ function Products({ products, onAddToCart }) {
 
       <List>
         {products.length !== 0 ? (
-          categorizedProducts.map(({ id, assets, name, price }) => (
-            <ListItem key={id}>
-              <Card to={`/products/${collection}/${id}`}>
-                <Image src={assets[1].url} />
-                <Image
-                  src={assets[0].url}
-                  onMouseEnter={(e) => {
-                    e.target.style.opacity = 0;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.opacity = 1;
-                  }}
-                />
-                <Icons>
-                  <Icon
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onAddToCart(id, 1);
+          categorizedProducts.map(
+            ({ id, assets, name, price, variant_groups }) => (
+              <ListItem key={id}>
+                <Card to={`/products/${collection}/${id}`}>
+                  <Image src={assets[1].url} />
+                  <Image
+                    src={assets[0].url}
+                    onMouseEnter={(e) => {
+                      e.target.style.opacity = 0;
                     }}
-                  >
-                    <AddShoppingCartIcon fontSize="small" />
-                  </Icon>
-                  <Icon
-                    onClick={(e) => {
-                      e.preventDefault();
+                    onMouseLeave={(e) => {
+                      e.target.style.opacity = 1;
                     }}
-                  >
-                    <FavoriteBorderIcon fontSize="small" />
-                  </Icon>
-                </Icons>
-              </Card>
-              <Info>
-                <Title>{name}</Title>
-                <Price>{price.formatted_with_symbol}</Price>
-              </Info>
-            </ListItem>
-          ))
+                  />
+                  <Icons>
+                    {variant_groups.length === 0 ? (
+                      <Icon
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onAddToCart(id, 1);
+                        }}
+                      >
+                        <AddShoppingCartIcon fontSize="small" />
+                      </Icon>
+                    ) : (
+                      <PopperOver
+                        id={id}
+                        variant_groups={variant_groups}
+                        onAddToCart={onAddToCart}
+                      />
+                    )}
+                    <Icon
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                    >
+                      <FavoriteBorderIcon fontSize="small" />
+                    </Icon>
+                  </Icons>
+                </Card>
+                <Info>
+                  <Title>{name}</Title>
+                  <Price>{price.formatted_with_symbol}</Price>
+                </Info>
+              </ListItem>
+            )
+          )
         ) : (
           <Box sx={loader}>
             <CircularProgress size={80} sx={{ color: '#000' }} />
