@@ -49,20 +49,25 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 160px;
+  height: 50px;
 
   font-size: 1rem;
   color: #000;
-  background-color: transparent;
-  border: 2px solid #000;
+  border: none;
+  background-color: #fdcc0d;
+  box-shadow: 0 2px 5px #616161;
 
   cursor: pointer;
 
   transition: all 0.5s;
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    opacity: 0.8;
   }
 `;
 

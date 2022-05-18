@@ -5,6 +5,8 @@ import { Box, CircularProgress } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+import PopperOver from './PopperOver/PopperOver';
+
 import {
   Card,
   Container,
@@ -20,9 +22,8 @@ import {
   Price,
   Select,
   Title,
-  loader,
 } from './styles';
-import PopperOver from '../../components/PopperOver/PopperOver';
+import { loader } from '../../styles';
 
 function Products({ products, onAddToCart }) {
   const { collection } = useParams();
@@ -72,6 +73,7 @@ function Products({ products, onAddToCart }) {
                       e.target.style.opacity = 1;
                     }}
                   />
+
                   <Icons>
                     {variant_groups.length === 0 ? (
                       <Icon

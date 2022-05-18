@@ -3,7 +3,7 @@ import { Menu, MenuItem } from '@mui/material';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-import { Icon } from '../../pages/Products/styles';
+import { Icon } from '../styles';
 
 function PopperOver({ id, variant_groups, onAddToCart }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,8 +20,8 @@ function PopperOver({ id, variant_groups, onAddToCart }) {
     e.preventDefault();
 
     const size = { [varGroupId]: varOptionId };
-
     onAddToCart(productId, 1, size);
+
     setAnchorEl(null);
   };
 
@@ -33,7 +33,10 @@ function PopperOver({ id, variant_groups, onAddToCart }) {
       <Menu
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={(e) => {
+          e.preventDefault();
+          setAnchorEl(null);
+        }}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'left',

@@ -38,12 +38,10 @@ export const Select = styled.select`
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 export const ListItem = styled.li`
   position: relative;
-  /* flex: 1; */
   margin: 3rem 0.5rem;
   min-width: 320px;
   height: 380px;
@@ -101,21 +99,19 @@ export const Icon = styled.li`
   color: #000;
   font-size: 0.5rem;
   border-radius: 50%;
+
   margin-bottom: 0.5rem;
   padding: 0.5rem;
+
   background-color: #fdcc0d;
   transition: all 0.5s;
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
+  }
+
+  &:active {
+    transform: scale(1.4);
   }
 `;
-
-export const loader = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: '50vh',
-};

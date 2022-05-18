@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { Box, CircularProgress } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import {
@@ -18,19 +19,36 @@ import {
   Icon,
 } from './styles';
 
-import { loader, Select } from '../Products/styles';
-import { Box, CircularProgress } from '@mui/material';
+import { Select } from '../Products/styles';
+import { loader, miniLoader } from '../../styles';
 
-function Product({ products, onAddToCart }) {
+function Product({ products, cart, onAddToCart }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+
   const [size, setSize] = useState({});
 
   const { productId } = useParams();
-
   const { id, assets, name, price, variant_groups } =
     products.length !== 0
       ? products.find((product) => product.id === productId)
       : [];
+
+  useEffect(() => {
+    products.length !== 0 &&
+      setSize({
+        [variant_groups[0].id]: variant_groups[0].options[0].id,
+      });
+  }, [products.length, variant_groups]);
+
+  const handleAddToCart = () => {
+    setIsLoading(true);
+    onAddToCart(id, quantity, size);
+  };
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [cart]);
 
   console.log('size', size);
 
@@ -80,8 +98,14 @@ function Product({ products, onAddToCart }) {
             </Filter>
 
             <ButtonGroup>
-              <Button onClick={() => onAddToCart(id, quantity, size)}>
-                Add to cart
+              <Button onClick={handleAddToCart}>
+                {isLoading ? (
+                  <Box sx={miniLoader}>
+                    <CircularProgress size={25} sx={{ color: '#000' }} />
+                  </Box>
+                ) : (
+                  'Add to cart'
+                )}
               </Button>
               <Icon>
                 <FavoriteBorderIcon />
@@ -89,11 +113,15 @@ function Product({ products, onAddToCart }) {
             </ButtonGroup>
 
             <Info>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              repellat quia dignissimos, quibusdam facere voluptatum
-              consequuntur similique sint aliquid? Quaerat necessitatibus fuga
-              optio! Veritatis dolorem velit iure illo sunt, neque, quae, saepe
-              sequi nesciunt eum vero autem doloribus rerum error!
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere
+              architecto eos explicabo aut praesentium, fugiat labore tempora
+              laboriosam sapiente itaque.
+            </Info>
+            <Info>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+              optio voluptate ea, odit sed cum quidem impedit illum, harum
+              accusamus incidunt maxime tempore cumque ullam aperiam ducimus
+              voluptatibus perferendis. Facilis!
             </Info>
             <Info>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,
