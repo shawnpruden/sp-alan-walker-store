@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Badge } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import {
@@ -41,7 +42,9 @@ function Header({ totalItems }) {
           </Link>
         </Center>
         <Right>
-          <HeaderLink to="/cart">Sign Up</HeaderLink>
+          <HeaderLink to="/account">
+            <AccountCircleIcon />
+          </HeaderLink>
           <HeaderLink to="/cart">
             <Badge badgeContent={totalItems} color="error">
               <ShoppingCartOutlinedIcon />

@@ -113,5 +113,6 @@ export const Icon = styled.li`
 
   &:active {
     transform: scale(1.4);
+    opacity: 0.5;
   }
 `;

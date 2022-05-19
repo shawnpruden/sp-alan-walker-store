@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 import { Announcement, Footer, Header, Navbar } from './components';
-import { Cart, Home, Product, Products } from './pages';
+import { Cart, Home, Product, Products, Checkout, Account } from './pages';
 
 import { theme } from './styles';
 
@@ -93,6 +93,9 @@ const App = () => {
             />
           }
         />
+
+        <Route path="/account/*" element={<Account />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
 
       <Footer />

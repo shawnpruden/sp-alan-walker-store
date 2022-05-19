@@ -81,12 +81,13 @@ function Cart({
               'CLEAR CART'
             )}
           </Button>
-          <Button type="checkout">CHECK OUT</Button>
+          <Button type="checkout">
+            <Link to="/checkout">CHECK OUT</Link>
+          </Button>
         </ButtonGroup>
       </CartDetails>
     </>
   );
-  console.log(line_items, subtotal);
 
   return (
     <Container>

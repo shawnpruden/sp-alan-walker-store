@@ -21,13 +21,13 @@ function Slider() {
 
     slideInterval.current = setInterval(() => {
       handleClick('right');
-    }, 8000);
+    }, 5000);
   }, []);
 
   useEffect(() => {
     slideInterval.current = setInterval(() => {
       handleClick('right');
-    }, 8000);
+    }, 5000);
   }, [handleClick]);
 
   return (

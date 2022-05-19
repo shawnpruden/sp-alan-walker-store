@@ -79,8 +79,17 @@ export const Right = styled.div`
 `;
 
 export const HeaderLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-size: 1rem;
   color: #fff;
 
   margin-left: 1.5rem;
+
+  transition: all 0.5s;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
