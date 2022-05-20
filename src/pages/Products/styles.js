@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.section`
   padding: 3rem;
+  ${mobile({ padding: '3rem 0' })}
 `;
 
 export const Filters = styled.ul`
   display: flex;
   justify-content: space-between;
   padding: 0 2rem;
+
+  ${mobile({ flexDirection: 'column' })}
 `;
 
-export const Filter = styled.li``;
+export const Filter = styled.li`
+  ${mobile({ marginTop: '1rem' })}
+`;
 
 export const Label = styled.span`
   font-size: 1.2rem;
@@ -38,6 +44,8 @@ export const Select = styled.select`
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
+
+  ${mobile({ justifyContent: 'center', padding: '0 1rem' })}
 `;
 
 export const ListItem = styled.li`
@@ -45,6 +53,8 @@ export const ListItem = styled.li`
   margin: 3rem 0.5rem;
   min-width: 320px;
   height: 380px;
+
+  ${mobile({ margin: '3rem 0' })}
 `;
 
 export const Icons = styled.ul`

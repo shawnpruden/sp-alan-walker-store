@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 const Container = styled.nav`
   background-color: #000;
@@ -13,6 +15,8 @@ const NavbarItems = styled.ul`
   align-items: center;
 
   height: 50px;
+
+  ${mobile({ flexDirection: 'column', alignItems: 'center', height: '100%' })}
 `;
 
 const NavbarItem = styled.li`
@@ -20,15 +24,17 @@ const NavbarItem = styled.li`
 
   cursor: pointer;
 
-  & a:hover {
-    color: #fdcc0d;
-  }
-
   & a {
     color: #fff;
     padding: 0.2rem 0;
     transition: color 0.5s ease-in-out;
   }
+
+  & a:hover {
+    color: #fdcc0d;
+  }
+
+  ${mobile({ margin: '0.5rem' })}
 `;
 
 function Navbar() {

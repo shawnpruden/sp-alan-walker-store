@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.section`
   display: flex;
   padding: 5rem;
+
+  ${mobile({ padding: '1rem', flexDirection: 'column' })}
 `;
 
 export const Left = styled.div`
@@ -17,6 +20,8 @@ export const Image = styled.img`
 export const Right = styled.div`
   flex: 1;
   margin: 0 3rem;
+
+  ${mobile({ margin: 0 })}
 `;
 
 export const Title = styled.h3`

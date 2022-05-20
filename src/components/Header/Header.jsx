@@ -13,6 +13,7 @@ import {
   Language,
   Left,
   Logo,
+  MSearchIcon,
   Right,
   SearchBar,
 } from './styles';
@@ -32,9 +33,13 @@ function Header({ totalItems }) {
             <Input
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              placeholder="Search"
             />
             <SearchIcon style={isFocused ? { color: '#fdcc0d' } : {}} />
           </SearchBar>
+          <MSearchIcon>
+            <SearchIcon />
+          </MSearchIcon>
         </Left>
         <Center>
           <Link to="/">

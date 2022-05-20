@@ -36,6 +36,7 @@ function Product({ products, cart, onAddToCart }) {
 
   useEffect(() => {
     products.length !== 0 &&
+      variant_groups.length !== 0 &&
       setSize({
         [variant_groups[0].id]: variant_groups[0].options[0].id,
       });
@@ -50,6 +51,7 @@ function Product({ products, cart, onAddToCart }) {
     setIsLoading(false);
   }, [cart]);
 
+  console.log('length', products.length);
   console.log('size', size);
 
   return (

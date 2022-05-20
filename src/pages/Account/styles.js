@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.section`
   display: flex;
@@ -7,6 +8,8 @@ export const Container = styled.section`
   align-items: center;
 
   padding: 3rem;
+
+  ${mobile({ padding: '2rem 1rem' })}
 `;
 
 export const Title = styled.h3`
@@ -15,6 +18,8 @@ export const Title = styled.h3`
 
   color: #424242;
   font-style: italic;
+
+  ${mobile({ fontSize: '2rem', margin: '0 2rem' })}
 `;
 
 export const Wrapper = styled.div`
@@ -23,12 +28,16 @@ export const Wrapper = styled.div`
 
   border: 2px solid #e5e5e5;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+
+  ${mobile({ width: '100%', marginTop: '1.5rem' })}
 `;
 
 export const SubTitle = styled.h4`
   font-size: 2rem;
 
   font-weight: normal;
+
+  ${mobile({ fontSize: '1.5rem' })}
 `;
 
 export const Form = styled.form`
@@ -96,6 +105,8 @@ export const Button = styled.button`
       opacity: 0.8;
     }
   }
+
+  ${mobile({ margin: '2rem' })}
 `;
 
 export const Text = styled.p`

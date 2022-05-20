@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.section`
   position: relative;
@@ -6,6 +7,8 @@ export const Container = styled.section`
   overflow: hidden;
 
   background-color: #000;
+
+  ${mobile({ display: 'none' })}
 `;
 
 export const ArrowBtn = styled.div`

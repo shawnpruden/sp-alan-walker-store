@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Gallery = styled.div`
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 60vh 60vh;
+
+  ${mobile({
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '50vh 50vh 50vh',
+    gap: '1rem',
+  })}
 `;
 
 export const Image = styled.img`
@@ -14,6 +21,7 @@ export const Image = styled.img`
 
   &:first-child {
     grid-row: 1 / span 2;
+    ${mobile({ gridRow: 1 })}
   }
 `;
 
@@ -22,6 +30,11 @@ export const Container = styled.div`
 
   &:nth-child(2) ${Gallery} {
     grid-template-columns: 1fr 2fr;
+
+    ${mobile({
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '50vh 50vh 50vh',
+    })}
   }
 
   &:nth-child(2) ${Image} {
@@ -31,8 +44,11 @@ export const Container = styled.div`
 
     &:last-child {
       grid-row: 1 / span 2;
+      ${mobile({ gridRow: '3' })}
     }
   }
+
+  ${mobile({ padding: '1rem' })}
 `;
 
 export const Title = styled.h2`

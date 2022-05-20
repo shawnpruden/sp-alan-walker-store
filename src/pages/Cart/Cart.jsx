@@ -41,7 +41,7 @@ function Cart({
       <Title>There is no items in your shopping cart</Title>
       <Button>
         <Link to="/" style={{ color: '#fff' }}>
-          Continue shopping
+          CONTINUE SHOPPING
         </Link>
       </Button>
     </>

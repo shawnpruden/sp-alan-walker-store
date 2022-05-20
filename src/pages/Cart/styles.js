@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.section`
   display: flex;
@@ -7,11 +8,15 @@ export const Container = styled.section`
   justify-content: center;
 
   padding: 3rem;
+
+  ${mobile({ padding: '1rem' })}
 `;
 
 export const Title = styled.h3`
   font-size: 2rem;
   margin-bottom: 2rem;
+
+  ${mobile({ fontSize: '1.5rem', margin: '0 2rem 2rem' })}
 `;
 
 export const TextWrapper = styled.ul`
@@ -21,6 +26,14 @@ export const TextWrapper = styled.ul`
   width: 100%;
   font-style: italic;
   color: #9e9e9e;
+
+  li:nth-child(2) {
+    ${mobile({ display: 'none' })}
+  }
+
+  li:nth-child(3) {
+    ${mobile({ textAlign: 'end' })}
+  }
 `;
 
 export const Text = styled.li`
@@ -51,10 +64,17 @@ export const CartDetails = styled.div`
 export const Subtotal = styled.h4`
   font-size: 1.5rem;
   margin: 4rem;
+
+  ${mobile({ margin: '2rem 0', fontSize: '1.2rem' })}
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
+  justify-content: flex-end;
+
+  width: 100%;
+
+  ${mobile({ justifyContent: 'space-between' })}
 `;
 
 export const Button = styled.button`
@@ -62,7 +82,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 160px;
+  width: 220px;
   height: 50px;
 
   background-color: ${(props) => (props.type === 'clear' ? '#e63946' : '#000')};
@@ -85,4 +105,6 @@ export const Button = styled.button`
   a {
     color: #fff;
   }
+
+  ${mobile({ margin: '0 0.5rem 2rem' })}
 `;

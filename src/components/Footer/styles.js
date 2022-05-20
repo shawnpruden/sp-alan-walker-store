@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.footer`
   padding: 3rem;
@@ -20,6 +21,9 @@ export const Title = styled.h4`
 
 export const MenuList = styled.ul`
   display: flex;
+  flex-wrap: wrap;
+
+  ${mobile({ flexDirection: 'column', alignItems: 'center' })}
 `;
 
 export const MenuItem = styled.li`
@@ -40,6 +44,7 @@ export const Wrapper = styled.div`
   align-items: center;
 
   margin-top: 3rem;
+  ${mobile({ flexDirection: 'column', alignItems: 'center' })}
 `;
 
 export const Subscribe = styled.div`
@@ -84,6 +89,7 @@ export const Input = styled.input`
 
 export const SocialIcons = styled.ul`
   display: flex;
+  ${mobile({ marginTop: '1rem' })}
 `;
 
 export const SocialIcon = styled.li`

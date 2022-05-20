@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mobile } from '../../responsiveness';
 
 export const Container = styled.p`
   height: 40px;
@@ -13,6 +14,8 @@ export const Container = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${mobile({ fontSize: '0.7rem' })}
 `;
 
 function Announcement() {
