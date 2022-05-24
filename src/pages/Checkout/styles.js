@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from '../../responsiveness';
+import { mobile } from '../../mobile';
 
 export const Container = styled.section`
   display: flex;
@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
 
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 
-  ${mobile({ width: '100%', marginTop: '1.5rem' })}
+  ${mobile({ width: '100%', padding: '1rem 0.5rem' })}
 `;
 
 export const Form = styled.form`

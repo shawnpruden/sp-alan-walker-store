@@ -33,7 +33,7 @@ function Checkout({ cart, onRefreshCart }) {
       } catch {
         setTimeout(() => {
           navigate('/');
-        }, 3000);
+        }, 10000);
       }
     };
 

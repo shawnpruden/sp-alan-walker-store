@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { mobile } from '../../responsiveness';
+import { mobile } from '../../mobile';
 
 export const Container = styled.section`
   padding: 3rem;

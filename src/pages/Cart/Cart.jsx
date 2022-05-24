@@ -39,10 +39,8 @@ function Cart({
   const EmptyCart = () => (
     <>
       <Title>There is no items in your shopping cart</Title>
-      <Button>
-        <Link to="/" style={{ color: '#fff' }}>
-          CONTINUE SHOPPING
-        </Link>
+      <Button as={Link} to="/">
+        CONTINUE SHOPPING
       </Button>
     </>
   );

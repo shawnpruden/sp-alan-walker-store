@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mobile } from '../../responsiveness';
+import { mobile } from '../../mobile';
 
 export const Container = styled.p`
   height: 40px;

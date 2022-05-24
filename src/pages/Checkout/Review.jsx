@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Badge } from '@mui/material';
 
 import styled from 'styled-components';
+import { mobile } from '../../mobile';
 
 const Title = styled.h4`
   font-size: 1.4rem;
@@ -39,6 +40,8 @@ const ProductInfo = styled.div`
   flex-direction: column;
 
   padding: 1rem 0 0 1rem;
+
+  ${mobile({ padding: '0.5rem 0 0 1rem' })}
 `;
 
 const Name = styled.h5`
@@ -48,6 +51,8 @@ const Name = styled.h5`
 const Size = styled.span`
   font-size: 0.8rem;
   color: #9e9e9e;
+
+  ${mobile({ marginTop: '0.5rem' })}
 `;
 
 const Price = styled.span`

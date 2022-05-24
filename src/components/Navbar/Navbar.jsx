@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { mobile } from '../../responsiveness';
+import { mobile } from '../../mobile';
 
 const Container = styled.nav`
   background-color: #000;

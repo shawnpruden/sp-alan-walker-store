@@ -66,7 +66,6 @@ function Product({ products, cart, onAddToCart }) {
                 <Label htmlFor="size">Size</Label>
                 <Select
                   id="size"
-                  value={size}
                   onChange={(e) =>
                     setSize({ [variant_groups[0].id]: e.target.value })
                   }
