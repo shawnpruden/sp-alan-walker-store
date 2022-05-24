@@ -45,13 +45,16 @@ const App = () => {
     setCart(cart);
   };
 
+  const handleRefreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+
+    setCart(newCart);
+  };
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, []);
-
-  console.log('product log', products);
-  console.log('cart log', cart);
 
   return (
     <ThemeProvider theme={theme}>
@@ -95,7 +98,10 @@ const App = () => {
         />
 
         <Route path="/account/*" element={<Account />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route
+          path="/checkout"
+          element={<Checkout cart={cart} onRefreshCart={handleRefreshCart} />}
+        />
       </Routes>
 
       <Footer />

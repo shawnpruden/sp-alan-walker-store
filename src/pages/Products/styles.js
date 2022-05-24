@@ -45,7 +45,11 @@ export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
 
-  ${mobile({ justifyContent: 'center', padding: '0 1rem' })}
+  @media (max-width: 1439px) {
+    justify-content: center;
+  }
+
+  ${mobile({ padding: '0 1rem' })}
 `;
 
 export const ListItem = styled.li`

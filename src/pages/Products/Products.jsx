@@ -5,7 +5,7 @@ import { Box, CircularProgress } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import PopperOver from './PopperOver/PopperOver';
+import PopperOverIcon from './PopperOverIcon/PopperOverIcon';
 
 import {
   Card,
@@ -58,7 +58,7 @@ function Products({ products, onAddToCart }) {
       </Filters>
 
       <List>
-        {products.length !== 0 ? (
+        {products.length ? (
           categorizedProducts.map(
             ({ id, assets, name, price, variant_groups }) => (
               <ListItem key={id}>
@@ -75,7 +75,7 @@ function Products({ products, onAddToCart }) {
                   />
 
                   <Icons>
-                    {variant_groups.length === 0 ? (
+                    {!variant_groups.length ? (
                       <Icon
                         onClick={(e) => {
                           e.preventDefault();
@@ -85,7 +85,7 @@ function Products({ products, onAddToCart }) {
                         <AddShoppingCartIcon fontSize="small" />
                       </Icon>
                     ) : (
-                      <PopperOver
+                      <PopperOverIcon
                         id={id}
                         variant_groups={variant_groups}
                         onAddToCart={onAddToCart}

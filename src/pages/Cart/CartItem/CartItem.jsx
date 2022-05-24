@@ -39,6 +39,7 @@ function CartItem({
   } else if (name.includes('DRONE REPAIR SHOP')) {
     collection = 'drone-repair-shop';
   }
+
   return (
     <Wrapper>
       <ProductImage>

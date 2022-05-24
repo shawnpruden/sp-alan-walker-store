@@ -23,10 +23,9 @@ export const Title = styled.h3`
 `;
 
 export const Wrapper = styled.div`
-  width: ${(props) => (props.type === 'login' ? '30%' : '40%')};
+  width: ${(props) => (props.type === 'login' ? '400px' : '540px')};
   padding: 2rem;
 
-  border: 2px solid #e5e5e5;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 
   ${mobile({ width: '100%', marginTop: '1.5rem' })}

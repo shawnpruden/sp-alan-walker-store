@@ -24,19 +24,18 @@ import { loader, miniLoader } from '../../styles';
 
 function Product({ products, cart, onAddToCart }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
+  const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState({});
 
   const { productId } = useParams();
-  const { id, assets, name, price, variant_groups } =
-    products.length !== 0
-      ? products.find((product) => product.id === productId)
-      : [];
+  const { id, assets, name, price, variant_groups } = products.length
+    ? products.find((product) => product.id === productId)
+    : [];
 
   useEffect(() => {
-    products.length !== 0 &&
-      variant_groups.length !== 0 &&
+    products.length &&
+      variant_groups.length &&
       setSize({
         [variant_groups[0].id]: variant_groups[0].options[0].id,
       });
@@ -51,12 +50,9 @@ function Product({ products, cart, onAddToCart }) {
     setIsLoading(false);
   }, [cart]);
 
-  console.log('length', products.length);
-  console.log('size', size);
-
   return (
     <>
-      {products.length !== 0 ? (
+      {products.length ? (
         <Container>
           <Left>
             <Image src={assets[0].url} alt={name} />
@@ -70,6 +66,7 @@ function Product({ products, cart, onAddToCart }) {
                 <Label htmlFor="size">Size</Label>
                 <Select
                   id="size"
+                  value={size}
                   onChange={(e) =>
                     setSize({ [variant_groups[0].id]: e.target.value })
                   }

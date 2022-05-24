@@ -75,14 +75,14 @@ function Cart({
           <Button type="clear" onClick={handleEmptyCart}>
             {isLoading ? (
               <Box sx={miniLoader}>
-                <CircularProgress size={25} sx={{ color: '#000' }} />
+                <CircularProgress size={25} sx={{ color: '#fff' }} />
               </Box>
             ) : (
               'CLEAR CART'
             )}
           </Button>
-          <Button type="checkout">
-            <Link to="/checkout">CHECK OUT</Link>
+          <Button type="checkout" as={Link} to="/checkout">
+            CHECK OUT
           </Button>
         </ButtonGroup>
       </CartDetails>

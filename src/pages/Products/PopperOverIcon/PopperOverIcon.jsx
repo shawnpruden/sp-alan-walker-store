@@ -5,7 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { Icon } from '../styles';
 
-function PopperOver({ id, variant_groups, onAddToCart }) {
+function PopperOverIcon({ id, variant_groups, onAddToCart }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -59,4 +59,4 @@ function PopperOver({ id, variant_groups, onAddToCart }) {
   );
 }
 
-export default PopperOver;
+export default PopperOverIcon;

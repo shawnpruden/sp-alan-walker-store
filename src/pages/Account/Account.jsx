@@ -18,12 +18,12 @@ function Account() {
     <Wrapper>
       <SubTitle>CREATE AN ACCOUNT</SubTitle>
       <Form>
-        <Input type="text" placeholder="First Name" />
-        <Input type="text" placeholder="Last Name" />
-        <Input type="text" placeholder="Username" />
-        <Input type="email" placeholder="Email Address" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
+        <Input name="firstName" type="text" placeholder="First Name" />
+        <Input name="lastName" type="text" placeholder="Last Name" />
+        <Input name="name" type="text" placeholder="Username" />
+        <Input name="email" type="email" placeholder="Email Address" />
+        <Input name="password" type="password" placeholder="Password" />
+        <Input name="password" type="password" placeholder="Confirm Password" />
       </Form>
       <SubText>
         By creating an account with us, you agree to the{' '}
