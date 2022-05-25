@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Box, CircularProgress } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import PopperOverIcon from './PopperOverIcon/PopperOverIcon';
@@ -23,14 +22,63 @@ import {
   Select,
   Title,
 } from './styles';
+
 import { loader } from '../../styles';
 
+const sortProducts = (products, condition) => {
+  switch (condition) {
+    case 'price-asc':
+      return products.sort(
+        (productA, productB) => productA.price.raw - productB.price.raw
+      );
+
+    case 'price-desc':
+      return products.sort(
+        (productA, productB) => productB.price.raw - productA.price.raw
+      );
+
+    case 'newest':
+      return products.reverse();
+
+    case 'tops':
+      return products.filter(
+        (product) => product.variant_groups[1].options[0].name === 'tops'
+      );
+    case 'bottoms':
+      return products.filter(
+        (product) => product.variant_groups[1].options[0].name === 'bottoms'
+      );
+
+    case 'hats':
+      return products.filter(
+        (product) => product.variant_groups[1].options[0].name === 'hats'
+      );
+
+    case 'masks':
+      return products.filter(
+        (product) => product.variant_groups[1].options[0].name === 'masks'
+      );
+
+    case 'accessories':
+      return products.filter(
+        (product) => product.variant_groups[1].options[0].name === 'accessories'
+      );
+
+    default:
+      return products;
+  }
+};
+
 function Products({ products, onAddToCart }) {
+  const [condition, setCondition] = useState('');
+
   const { collection } = useParams();
 
   const categorizedProducts = products.filter(
     (product) => product.categories[0].slug === collection
   );
+
+  const sortedProducts = sortProducts(categorizedProducts, condition);
 
   return (
     <Container>
@@ -38,75 +86,63 @@ function Products({ products, onAddToCart }) {
         <Filter>
           <Label>Filter Products:</Label>
 
-          <Select>
+          <Select onChange={(e) => setCondition(e.target.value)}>
             <option value="">Category</option>
             <option value="tops">Tops</option>
             <option value="bottoms">Bottoms</option>
             <option value="hats">Hats</option>
             <option value="masks">Masks</option>
+            <option value="accessories">Accessories</option>
           </Select>
         </Filter>
         <Filter>
           <Label>Sort by:</Label>
-          <Select>
+          <Select onChange={(e) => setCondition(e.target.value)}>
             <option value="best-selling">Best selling</option>
             <option value="newest">Newest</option>
-            <option value="price-ascending">Price: low to high</option>
-            <option value="price-descending">Price: high to low</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
           </Select>
         </Filter>
       </Filters>
 
       <List>
         {products.length ? (
-          categorizedProducts.map(
-            ({ id, assets, name, price, variant_groups }) => (
-              <ListItem key={id}>
-                <Card to={`/products/${collection}/${id}`}>
-                  <Image src={assets[1].url} />
-                  <Image
-                    src={assets[0].url}
-                    onMouseEnter={(e) => {
-                      e.target.style.opacity = 0;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.opacity = 1;
-                    }}
-                  />
+          sortedProducts.map(({ id, assets, name, price, variant_groups }) => (
+            <ListItem key={id}>
+              <Card to={`/products/${collection}/${id}`}>
+                <Image src={assets[1].url} />
+                <Image
+                  src={assets[0].url}
+                  onMouseEnter={(e) => {
+                    e.target.style.opacity = 0;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.opacity = 1;
+                  }}
+                />
 
-                  <Icons>
-                    {!variant_groups.length ? (
-                      <Icon
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onAddToCart(id, 1);
-                        }}
-                      >
-                        <AddShoppingCartIcon fontSize="small" />
-                      </Icon>
-                    ) : (
-                      <PopperOverIcon
-                        id={id}
-                        variant_groups={variant_groups}
-                        onAddToCart={onAddToCart}
-                      />
-                    )}
-                    <Icon
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      <FavoriteBorderIcon fontSize="small" />
-                    </Icon>
-                  </Icons>
-                </Card>
-                <Info>
-                  <Title>{name}</Title>
-                  <Price>{price.formatted_with_symbol}</Price>
-                </Info>
-              </ListItem>
-            )
-          )
+                <Icons>
+                  <PopperOverIcon
+                    id={id}
+                    variant_groups={variant_groups}
+                    onAddToCart={onAddToCart}
+                  />
+                  <Icon
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <FavoriteBorderIcon fontSize="small" />
+                  </Icon>
+                </Icons>
+              </Card>
+              <Info>
+                <Title>{name}</Title>
+                <Price>{price.formatted_with_symbol}</Price>
+              </Info>
+            </ListItem>
+          ))
         ) : (
           <Box sx={loader}>
             <CircularProgress size={80} sx={{ color: '#000' }} />
