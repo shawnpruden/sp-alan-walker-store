@@ -75,6 +75,8 @@ export const Button = styled.div`
   text-align: center;
   margin-top: 5rem;
 
+  ${mobile({ margin: '2rem 0' })}
+
   a {
     display: inline-block;
     padding: 0.4rem 2rem;
@@ -92,5 +94,7 @@ export const Button = styled.div`
       color: #fff;
       background-color: #fdcc0d;
     }
+
+    ${mobile({ fontSize: '1rem' })}
   }
 `;
