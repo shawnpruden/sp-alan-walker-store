@@ -28,8 +28,6 @@ function Slider() {
 
   useEffect(() => {
     window.addEventListener('resize', () => {
-      window.location.reload();
-
       setWidth(window.innerWidth);
     });
 

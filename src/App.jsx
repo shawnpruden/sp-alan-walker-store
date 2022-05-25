@@ -56,6 +56,10 @@ const App = () => {
     fetchCart();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('resize', () => window.location.reload());
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
