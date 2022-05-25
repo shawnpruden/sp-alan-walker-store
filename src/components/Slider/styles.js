@@ -7,8 +7,6 @@ export const Container = styled.section`
   overflow: hidden;
 
   background-color: #000;
-
-  ${mobile({ display: 'none' })}
 `;
 
 export const ArrowBtn = styled.div`
@@ -41,6 +39,8 @@ export const ArrowBtn = styled.div`
     background-color: #9494947c;
     opacity: 1;
   }
+
+  ${mobile({ display: 'none' })}
 `;
 
 export const Wrapper = styled.div`
@@ -48,6 +48,8 @@ export const Wrapper = styled.div`
 
   transition: all 1.5s;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
+
+  ${mobile({ transform: 'translateX(-100vw)' })}
 `;
 
 export const Banner = styled.div``;

@@ -9,7 +9,9 @@ import BannerTwo from '../../assets/img/banner-2.jpg';
 
 function Slider() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
   const slideInterval = useRef();
+
   const handleClick = useCallback((direction) => {
     if (direction === 'left') {
       setSlideIndex((prevState) => (prevState > 0 ? prevState - 1 : 1));
@@ -25,10 +27,17 @@ function Slider() {
   }, []);
 
   useEffect(() => {
-    slideInterval.current = setInterval(() => {
-      handleClick('right');
-    }, 5000);
-  }, [handleClick]);
+    window.addEventListener('resize', () => {
+      window.location.reload();
+
+      setWidth(window.innerWidth);
+    });
+
+    if (width > 500)
+      slideInterval.current = setInterval(() => {
+        handleClick('right');
+      }, 5000);
+  }, [handleClick, width]);
 
   return (
     <Container>
