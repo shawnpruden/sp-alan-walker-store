@@ -40,6 +40,13 @@ const sortProducts = (products, condition) => {
     case 'newest':
       return products.reverse();
 
+    default:
+      return products;
+  }
+};
+
+const filterProducts = (products, category) => {
+  switch (category) {
     case 'tops':
       return products.filter(
         (product) => product.variant_groups[1].options[0].name === 'tops'
@@ -63,7 +70,6 @@ const sortProducts = (products, condition) => {
       return products.filter(
         (product) => product.variant_groups[1].options[0].name === 'accessories'
       );
-
     default:
       return products;
   }
@@ -71,6 +77,7 @@ const sortProducts = (products, condition) => {
 
 function Products({ products, onAddToCart }) {
   const [condition, setCondition] = useState('');
+  const [category, setCategory] = useState('');
 
   const { collection } = useParams();
 
@@ -78,7 +85,10 @@ function Products({ products, onAddToCart }) {
     (product) => product.categories[0].slug === collection
   );
 
-  const sortedProducts = sortProducts(categorizedProducts, condition);
+  const sortedProducts = filterProducts(
+    sortProducts(categorizedProducts, condition),
+    category
+  );
 
   return (
     <Container>
@@ -86,7 +96,7 @@ function Products({ products, onAddToCart }) {
         <Filter>
           <Label>Filter Products:</Label>
 
-          <Select onChange={(e) => setCondition(e.target.value)}>
+          <Select onChange={(e) => setCategory(e.target.value)}>
             <option value="">Category</option>
             <option value="tops">Tops</option>
             <option value="bottoms">Bottoms</option>
