@@ -7,6 +7,8 @@ export const Container = styled.section`
   overflow: hidden;
 
   background-color: #000;
+
+  display: none;
 `;
 
 export const ArrowBtn = styled.div`

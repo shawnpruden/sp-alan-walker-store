@@ -12,6 +12,7 @@ export const Container = styled.header`
 
   color: #fff;
   background-color: #000;
+
   ${mobile({ padding: '1.2rem' })}
 `;
 
@@ -19,23 +20,15 @@ export const Left = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
-
-  ${mobile({ flexDirection: 'column-reverse', alignItems: 'flex-start' })}
-`;
-
-export const Language = styled.span`
-  font-size: 1rem;
-  cursor: pointer;
-
-  ${mobile({ margin: '0.5rem 0.15rem' })}
 `;
 
 export const SearchBar = styled.div`
+  position: relative;
+
   display: flex;
   align-items: center;
   border: 1px solid #949494;
 
-  margin-left: 2rem;
   padding: 0.4rem;
 
   transition: all 0.5s;
@@ -46,12 +39,24 @@ export const SearchBar = styled.div`
     font-size: 1.2rem;
   }
 
-  ${mobile({ display: 'none' })}
+  @media only screen and (max-width: 500px) {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+
+    justify-content: space-between;
+
+    padding: 0.4rem 1.2rem;
+
+    background-color: #000;
+    transform: translateY(calc(-100% - 2px));
+  }
 `;
 
 export const MSearchIcon = styled.div`
   display: none;
-  ${mobile({ display: 'flex', margin: '0.5rem 0' })}
+  ${mobile({ display: 'flex', alignItems: 'center' })}
 `;
 
 export const Input = styled.input`
@@ -59,9 +64,94 @@ export const Input = styled.input`
 
   background-color: #000;
   color: #fff;
+
   &:focus {
     outline: none;
   }
+
+  ${mobile({ flex: 1 })}
+`;
+
+export const SearchPanel = styled.div`
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -1px;
+  z-index: 2;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.5s, visibility 0s;
+
+  width: 500px;
+  border: 1px solid #eee;
+  background-color: #fff;
+
+  ${mobile({ width: 'calc(100% + 2px)' })}
+`;
+
+export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.5rem;
+`;
+
+export const ListItem = styled.li`
+  display: flex;
+
+  color: #000;
+
+  border: 2px solid transparent;
+  border-radius: 5px;
+
+  transition: all 0.5s;
+  &:hover {
+    border: 2px solid #fdcc0d;
+  }
+`;
+
+export const Image = styled.img`
+  width: 100px;
+  height: 100px;
+
+  object-fit: cover;
+  object-position: center;
+
+  padding: 0.5rem;
+`;
+
+export const Info = styled.div`
+  padding: 1rem 0 0 1rem;
+`;
+
+export const Name = styled.h5`
+  font-size: 1rem;
+`;
+
+export const Price = styled.p`
+  margin: 0.5rem 0;
+
+  color: #757575;
+  font-size: 0.8rem;
+  font-style: italic;
+`;
+
+export const Divider = styled.hr`
+  margin: 0.5rem 0;
+
+  background-color: #eee;
+  border: none;
+
+  width: 100%;
+  height: 1px;
+`;
+
+export const Message = styled.h6`
+  color: #000;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
 `;
 
 export const Center = styled.div`
@@ -107,5 +197,7 @@ export const HeaderLink = styled(Link)`
     opacity: 0.8;
   }
 
-  ${mobile({ margin: '0.5rem 0' })}
+  @media only screen and (max-width: 500px) {
+    display: ${(props) => (props.type === 'account' ? 'none' : 'block')};
+  }
 `;

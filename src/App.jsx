@@ -60,7 +60,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Announcement />
-      <Header totalItems={cart.total_items} />
+      <Header totalItems={cart.total_items} products={products} />
       <Navbar />
 
       <Routes>
