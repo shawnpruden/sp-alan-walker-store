@@ -24,6 +24,7 @@ export const Left = styled.div`
 
 export const SearchBar = styled.div`
   position: relative;
+  z-index: 10;
 
   display: flex;
   align-items: center;
@@ -76,7 +77,6 @@ export const SearchPanel = styled.div`
   position: absolute;
   top: calc(100% + 10px);
   left: -1px;
-  z-index: 2;
 
   opacity: 0;
   visibility: hidden;
