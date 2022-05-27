@@ -75,6 +75,8 @@ export const Input = styled.input`
 
 export const SearchPanel = styled.div`
   position: absolute;
+  z-index: 10;
+
   top: calc(100% + 10px);
   left: -1px;
 
