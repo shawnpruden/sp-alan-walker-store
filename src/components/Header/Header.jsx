@@ -63,7 +63,7 @@ function Header({ totalItems, products }) {
     e.target.value
       ? setResults(
           products.filter((product) =>
-            product.name.toLowerCase().includes(e.target.value)
+            product.name.toLowerCase().includes(e.target.value.toLowerCase())
           )
         )
       : setResults([]);
