@@ -80,7 +80,6 @@ function Products({ products, onAddToCart }) {
   const [category, setCategory] = useState('');
 
   const [isLoading, setIsLoading] = useState(true);
-  console.log(isLoading);
 
   const { collection } = useParams();
 
@@ -124,7 +123,7 @@ function Products({ products, onAddToCart }) {
           sortedProducts.map(({ id, assets, name, price, variant_groups }) => (
             <ListItem key={id}>
               <Card to={`/products/${collection}/${id}`}>
-                <Image src={assets[1].url} />
+                <Image src={assets[1].url} onLoad={() => setIsLoading(false)} />
                 <Image
                   src={assets[0].url}
                   onMouseEnter={(e) => {
@@ -133,7 +132,6 @@ function Products({ products, onAddToCart }) {
                   onMouseLeave={(e) => {
                     e.target.style.opacity = 1;
                   }}
-                  onLoad={() => setIsLoading(false)}
                 />
 
                 {isLoading ? (
