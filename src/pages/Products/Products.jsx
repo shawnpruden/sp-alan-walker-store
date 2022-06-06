@@ -79,6 +79,9 @@ function Products({ products, onAddToCart }) {
   const [condition, setCondition] = useState('');
   const [category, setCategory] = useState('');
 
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(isLoading);
+
   const { collection } = useParams();
 
   const categorizedProducts = products.filter(
@@ -130,18 +133,19 @@ function Products({ products, onAddToCart }) {
                   onMouseLeave={(e) => {
                     e.target.style.opacity = 1;
                   }}
+                  onLoad={() => setIsLoading(false)}
                 />
 
-                <Box
-                  sx={{
-                    ...miniLoader,
-                    height: '100%',
-                    position: 'relative',
-                    zIndex: '-1',
-                  }}
-                >
-                  <CircularProgress size={50} sx={{ color: '#000' }} />
-                </Box>
+                {isLoading ? (
+                  <Box
+                    sx={{
+                      ...miniLoader,
+                      height: '100%',
+                    }}
+                  >
+                    <CircularProgress size={50} sx={{ color: '#000' }} />
+                  </Box>
+                ) : null}
 
                 <Icons>
                   <PopperOverIcon
