@@ -23,7 +23,7 @@ import {
   Title,
 } from './styles';
 
-import { loader } from '../../styles';
+import { loader, miniLoader } from '../../styles';
 
 const sortProducts = (products, condition) => {
   switch (condition) {
@@ -131,6 +131,17 @@ function Products({ products, onAddToCart }) {
                     e.target.style.opacity = 1;
                   }}
                 />
+
+                <Box
+                  sx={{
+                    ...miniLoader,
+                    height: '100%',
+                    position: 'relative',
+                    zIndex: '-1',
+                  }}
+                >
+                  <CircularProgress size={50} sx={{ color: '#000' }} />
+                </Box>
 
                 <Icons>
                   <PopperOverIcon
