@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 export const Container = styled.footer`
   padding: 3rem;
   background-color: #000;
   color: #fff;
   border-top: 2px solid #252525;
+
+  ${mobile({ padding: '3rem 1rem' })}
 `;
 
 export const Menu = styled.div`
@@ -23,7 +25,17 @@ export const MenuList = styled.ul`
   display: flex;
   flex-wrap: wrap;
 
-  ${mobile({ flexDirection: 'column', alignItems: 'center' })}
+  margin-top: 1.5rem;
+
+  ${mobile({
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridTemplateRows: 'repeat(3, 1fr)',
+
+    fontSize: '0.8rem',
+    whiteSpace: 'nowrap',
+    textAlign: 'center',
+  })}
 `;
 
 export const MenuItem = styled.li`
@@ -36,6 +48,8 @@ export const MenuItem = styled.li`
   &:hover {
     color: #fdcc0d;
   }
+
+  ${mobile({ margin: '0.5rem' })}
 `;
 
 export const Wrapper = styled.div`
@@ -89,7 +103,8 @@ export const Input = styled.input`
 
 export const SocialIcons = styled.ul`
   display: flex;
-  ${mobile({ marginTop: '1rem' })}
+
+  margin-top: 1rem;
 `;
 
 export const SocialIcon = styled.li`

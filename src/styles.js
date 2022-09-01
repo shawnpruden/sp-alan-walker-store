@@ -19,3 +19,7 @@ export const miniLoader = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+export const disabled = {
+  pointerEvents: 'none',
+};

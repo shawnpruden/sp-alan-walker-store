@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleCart } from 'features/cartSlice';
 import { Link } from 'react-router-dom';
+
 import { Box, Button, ButtonGroup, CircularProgress } from '@mui/material';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -17,15 +20,15 @@ import {
   Wrapper,
 } from './styles';
 
-import { miniLoader } from '../../../styles.js';
+import { disabled, miniLoader } from 'styles.js';
 
 function CartItem({
-  cart,
   item: { id, image, name, line_total, quantity, product_id, selected_options },
-  onUpdateCartItem,
-  onRemoveCartItem,
 }) {
   const [isLoading, setIsLoading] = useState(false);
+
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
@@ -40,6 +43,22 @@ function CartItem({
     collection = 'drone-repair-shop';
   }
 
+  const handleClick = (type, amount) => {
+    setIsLoading(true);
+
+    if (type === 'remove') {
+      dispatch(handleCart({ type: 'remove', cartItemId: id }));
+    } else {
+      dispatch(
+        handleCart({
+          type: 'update',
+          cartItemId: id,
+          quantity: quantity + amount,
+        })
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <ProductImage>
@@ -47,6 +66,7 @@ function CartItem({
           <Image src={image.url} />
         </Link>
       </ProductImage>
+
       <ProductDetails>
         <ProductInfo>
           <Link to={`/products/${collection}/${product_id}`}>{name}</Link>
@@ -54,6 +74,7 @@ function CartItem({
             <Size>Size: {selected_options[0].option_name}</Size>
           )}
         </ProductInfo>
+
         <Quantity>
           <ButtonGroup
             variant="outlined"
@@ -62,33 +83,31 @@ function CartItem({
           >
             <Button
               sx={{ padding: 0 }}
-              onClick={() => {
-                setIsLoading(true);
-                onUpdateCartItem(id, quantity - 1);
-              }}
+              onClick={() => handleClick('update', -1)}
+              style={isLoading ? disabled : null}
             >
               <RemoveIcon fontSize="inherit" />
             </Button>
+
             <Button sx={{ cursor: 'text' }}>{quantity}</Button>
+
             <Button
               sx={{ padding: 0 }}
-              onClick={() => {
-                setIsLoading(true);
-                onUpdateCartItem(id, quantity + 1);
-              }}
+              onClick={() => handleClick('update', 1)}
+              style={isLoading ? disabled : null}
             >
               <AddIcon fontSize="inherit" />
             </Button>
           </ButtonGroup>
+
           <DeleteIcon
             sx={{ marginLeft: '1rem', color: '#616161', cursor: 'pointer' }}
-            onClick={() => {
-              setIsLoading(true);
-              onRemoveCartItem(id);
-            }}
+            onClick={() => handleClick('remove')}
+            style={isLoading ? disabled : null}
           />
         </Quantity>
       </ProductDetails>
+
       <Price>
         {isLoading ? (
           <Box sx={miniLoader}>

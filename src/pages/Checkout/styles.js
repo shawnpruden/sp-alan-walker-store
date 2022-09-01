@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 export const Container = styled.section`
   display: flex;
@@ -19,7 +19,7 @@ export const Title = styled.h4`
 
   margin-bottom: 1rem;
 
-  ${mobile({ fontSize: '1.5rem' })}
+  ${mobile({ fontSize: '1.5rem', textAlign: 'center' })}
 `;
 
 export const SubTitle = styled.h4`
@@ -34,6 +34,15 @@ export const Wrapper = styled.div`
   padding: 2rem;
 
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+
+  .Mui-active,
+  .Mui-completed {
+    color: #000 !important;
+  }
+
+  .css-kb8kkt-MuiBadge-badge {
+    background-color: #000;
+  }
 
   ${mobile({ width: '100%', padding: '1rem 0.5rem' })}
 `;
@@ -66,6 +75,18 @@ export const InputGroup = styled.div`
   width: 100%;
 
   margin: 1rem 1rem 0 0;
+
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 1rem;
+
+    font-size: 1.2rem;
+
+    pointer-events: none;
+  }
 `;
 
 export const Label = styled.label`
@@ -77,10 +98,15 @@ export const Label = styled.label`
 export const Select = styled.select`
   font-size: 1rem;
 
-  margin: 0.5rem 0;
+  width: 100%;
   padding: 0.8rem;
 
   border: 2px solid #e5e5e5;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
 
   transition: all 0.5s;
   &:focus {
@@ -101,10 +127,12 @@ export const Button = styled.button`
   margin: 2rem 0;
 
   font-size: 1rem;
-  color: #fff;
-  background-color: #000;
+  color: ${({ type }) => (type === 'submit' ? '#000' : '#fff')};
+
+  background-color: ${({ type }) => (type === 'submit' ? '#fdcc0d' : '#000')};
   border: none;
   box-shadow: 0 2px 5px #616161;
+
   cursor: pointer;
 
   transition: all 0.5s;

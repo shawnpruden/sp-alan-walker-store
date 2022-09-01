@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { handleCart } from 'features/cartSlice';
 
+import { Menu, MenuItem } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { Icon } from '../styles';
 
-function PopperOverIcon({ id, variant_groups, onAddToCart }) {
+function PopperOverIcon({ id, variant_groups }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
 
   const open = Boolean(anchorEl);
 
@@ -20,7 +23,10 @@ function PopperOverIcon({ id, variant_groups, onAddToCart }) {
     e.preventDefault();
 
     const size = { [varGroupId]: varOptionId };
-    onAddToCart(productId, 1, size);
+
+    dispatch(
+      handleCart({ type: 'add', productId, quantity: 1, variant: size })
+    );
 
     setAnchorEl(null);
   };
@@ -30,6 +36,7 @@ function PopperOverIcon({ id, variant_groups, onAddToCart }) {
       <Icon onClick={handleClick}>
         <AddShoppingCartIcon fontSize="small" />
       </Icon>
+
       <Menu
         anchorEl={anchorEl}
         open={open}

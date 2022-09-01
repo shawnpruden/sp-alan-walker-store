@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { commerce } from '../../lib/commerce';
+import { commerce } from 'lib/commerce';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
   Button,
@@ -87,6 +89,7 @@ function AddressForm({ token, nextStep }) {
   return (
     <>
       <SubTitle>Shipping address</SubTitle>
+
       <Form
         onSubmit={handleSubmit((data) => {
           window.scrollTo(0, 0);
@@ -100,73 +103,93 @@ function AddressForm({ token, nextStep }) {
           placeholder="First Name"
           required
         />
+
         <Input
           {...register('lastName', { required: true })}
           placeholder="Last Name"
           required
         />
+
         <Input
           {...register('address', { required: true })}
           placeholder="Address"
           required
         />
+
         <Input
           {...register('email', { required: true })}
           placeholder="Email Address"
           required
         />
+
         <Input
           {...register('city', { required: true })}
           placeholder="City"
           required
         />
+
         <Input
           {...register('zip', { required: true })}
           placeholder="ZIP or Postal Code"
           required
         />
+
         <InputGroup>
           <Label>Country or region</Label>
 
-          <Select value={country} onChange={(e) => setCountry(e.target.value)}>
-            {reformedCountries.map((item) => (
-              <option value={item.id} key={item.id}>
-                {item.option}
-              </option>
-            ))}
-          </Select>
+          <div style={{ position: 'relative' }}>
+            <Select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              {reformedCountries.map((item) => (
+                <option value={item.id} key={item.id}>
+                  {item.option}
+                </option>
+              ))}
+            </Select>
+            <ExpandMoreIcon />
+          </div>
         </InputGroup>
 
         <InputGroup>
           <Label>Subdivision</Label>
 
-          <Select
-            value={subdivision}
-            onChange={(e) => setSubdivision(e.target.value)}
-          >
-            {reformedSubdivisions.map((item) => (
-              <option value={item.id} key={item.id}>
-                {item.option}
-              </option>
-            ))}
-          </Select>
+          <div style={{ position: 'relative' }}>
+            <Select
+              value={subdivision}
+              onChange={(e) => setSubdivision(e.target.value)}
+            >
+              {reformedSubdivisions.map((item) => (
+                <option value={item.id} key={item.id}>
+                  {item.option}
+                </option>
+              ))}
+            </Select>
+            <ExpandMoreIcon />
+          </div>
         </InputGroup>
 
         <InputGroup>
           <Label>Shipping Options</Label>
 
-          <Select value={option} onChange={(e) => setOption(e.target.value)}>
-            {reformedOptions.map((item) => (
-              <option value={item.id} key={item.id}>
-                {item.option}
-              </option>
-            ))}
-          </Select>
+          <div style={{ position: 'relative' }}>
+            <Select value={option} onChange={(e) => setOption(e.target.value)}>
+              {reformedOptions.map((item) => (
+                <option value={item.id} key={item.id}>
+                  {item.option}
+                </option>
+              ))}
+            </Select>
+            <ExpandMoreIcon />
+          </div>
         </InputGroup>
+
         <ButtonGroup>
           <Button as={Link} to="/cart">
             Back to cart
           </Button>
+
           <Button type="submit">Next</Button>
         </ButtonGroup>
       </Form>

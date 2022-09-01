@@ -10,6 +10,7 @@ function Collection({ collection: { title, img, param } }) {
         {title}
         <Underline />
       </Title>
+
       <Gallery>
         <Image src={img[0]} />
         <Image src={img[1]} />

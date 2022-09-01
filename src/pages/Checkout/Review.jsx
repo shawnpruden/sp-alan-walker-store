@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 
 import { Badge } from '@mui/material';
 
-import styled from 'styled-components';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
+import styled from 'styled-components';
 const Title = styled.h4`
   font-size: 1.4rem;
   letter-spacing: 1px;
@@ -74,6 +74,7 @@ function Review({ token: { line_items } }) {
   return (
     <>
       <Title>Order Summery</Title>
+
       {line_items.map((item) => (
         <Fragment key={item.id}>
           <Wrapper>
@@ -81,6 +82,7 @@ function Review({ token: { line_items } }) {
               <Badge badgeContent={item.quantity} color="primary">
                 <Image src={item.image.url} />
               </Badge>
+
               <ProductInfo>
                 <Name>{item.product_name}</Name>
                 {item.selected_options.length ? (
@@ -88,8 +90,10 @@ function Review({ token: { line_items } }) {
                 ) : null}
               </ProductInfo>
             </Product>
+
             <Price>{item.price.formatted_with_symbol}</Price>
           </Wrapper>
+
           <Divider />
         </Fragment>
       ))}

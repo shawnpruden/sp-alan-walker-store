@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { mobile } from '../../mobile';
 
+import { mobile } from 'mobile';
+
+import styled from 'styled-components';
 export const Container = styled.p`
   height: 40px;
   font-size: 0.9rem;

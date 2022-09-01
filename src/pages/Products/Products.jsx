@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { Box, CircularProgress } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
-import PopperOverIcon from './PopperOverIcon/PopperOverIcon';
 
 import {
   Card,
@@ -14,72 +13,25 @@ import {
   Label,
   Icon,
   Icons,
-  Image,
   Info,
   List,
   ListItem,
   Price,
   Select,
   Title,
+  UnderImage,
+  UpperImage,
 } from './styles';
 
-import { loader, miniLoader } from '../../styles';
+import PopperOverIcon from './PopperOverIcon/PopperOverIcon';
+import { loader } from 'styles';
+import { filterProducts, sortProducts } from './funcs';
 
-const sortProducts = (products, condition) => {
-  switch (condition) {
-    case 'price-asc':
-      return products.sort(
-        (productA, productB) => productA.price.raw - productB.price.raw
-      );
-
-    case 'price-desc':
-      return products.sort(
-        (productA, productB) => productB.price.raw - productA.price.raw
-      );
-
-    case 'newest':
-      return products.reverse();
-
-    default:
-      return products;
-  }
-};
-
-const filterProducts = (products, category) => {
-  switch (category) {
-    case 'tops':
-      return products.filter(
-        (product) => product.variant_groups[1].options[0].name === 'tops'
-      );
-    case 'bottoms':
-      return products.filter(
-        (product) => product.variant_groups[1].options[0].name === 'bottoms'
-      );
-
-    case 'hats':
-      return products.filter(
-        (product) => product.variant_groups[1].options[0].name === 'hats'
-      );
-
-    case 'masks':
-      return products.filter(
-        (product) => product.variant_groups[1].options[0].name === 'masks'
-      );
-
-    case 'accessories':
-      return products.filter(
-        (product) => product.variant_groups[1].options[0].name === 'accessories'
-      );
-    default:
-      return products;
-  }
-};
-
-function Products({ products, onAddToCart }) {
+function Products() {
   const [condition, setCondition] = useState('');
   const [category, setCategory] = useState('');
 
-  const [isLoading, setIsLoading] = useState(true);
+  const { products } = useSelector((state) => state.products);
 
   const { collection } = useParams();
 
@@ -107,8 +59,10 @@ function Products({ products, onAddToCart }) {
             <option value="accessories">Accessories</option>
           </Select>
         </Filter>
+
         <Filter>
           <Label>Sort by:</Label>
+
           <Select onChange={(e) => setCondition(e.target.value)}>
             <option value="best-selling">Best selling</option>
             <option value="newest">Newest</option>
@@ -123,34 +77,13 @@ function Products({ products, onAddToCart }) {
           sortedProducts.map(({ id, assets, name, price, variant_groups }) => (
             <ListItem key={id}>
               <Card to={`/products/${collection}/${id}`}>
-                <Image src={assets[1].url} onLoad={() => setIsLoading(false)} />
-                <Image
-                  src={assets[0].url}
-                  onMouseEnter={(e) => {
-                    e.target.style.opacity = 0;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.opacity = 1;
-                  }}
-                />
+                <UnderImage src={assets[1].url} />
 
-                {isLoading ? (
-                  <Box
-                    sx={{
-                      ...miniLoader,
-                      height: '100%',
-                    }}
-                  >
-                    <CircularProgress size={50} sx={{ color: '#000' }} />
-                  </Box>
-                ) : null}
+                <UpperImage src={assets[0].url} />
 
                 <Icons>
-                  <PopperOverIcon
-                    id={id}
-                    variant_groups={variant_groups}
-                    onAddToCart={onAddToCart}
-                  />
+                  <PopperOverIcon id={id} variant_groups={variant_groups} />
+
                   <Icon
                     onClick={(e) => {
                       e.preventDefault();
@@ -160,8 +93,10 @@ function Products({ products, onAddToCart }) {
                   </Icon>
                 </Icons>
               </Card>
+
               <Info>
                 <Title>{name}</Title>
+
                 <Price>{price.formatted_with_symbol}</Price>
               </Info>
             </ListItem>

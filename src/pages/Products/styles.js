@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 export const Container = styled.section`
-  padding: 3rem;
-  ${mobile({ padding: '3rem 0' })}
+  padding: 6rem 3rem 8rem;
+
+  ${mobile({ padding: '3rem 1rem 6rem' })}
 `;
 
 export const Filters = styled.ul`
@@ -12,11 +13,11 @@ export const Filters = styled.ul`
   justify-content: space-between;
   padding: 0 2rem;
 
-  ${mobile({ flexDirection: 'column' })}
+  ${mobile({ flexDirection: 'column', padding: 0 })}
 `;
 
 export const Filter = styled.li`
-  ${mobile({ marginTop: '1rem' })}
+  ${mobile({ marginTop: '0.5rem' })}
 `;
 
 export const Label = styled.span`
@@ -42,23 +43,16 @@ export const Select = styled.select`
 `;
 
 export const List = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 6rem 1rem;
 
-  @media (max-width: 1439px) {
-    justify-content: center;
-  }
-
-  ${mobile({ padding: '0 1rem' })}
+  margin-top: 2rem;
 `;
 
 export const ListItem = styled.li`
   position: relative;
-  margin: 3rem 0.5rem;
-  min-width: 320px;
-  height: 380px;
-
-  ${mobile({ margin: '3rem 0' })}
+  border: 2px solid #000;
 `;
 
 export const Icons = styled.ul`
@@ -71,23 +65,36 @@ export const Icons = styled.ul`
 `;
 
 export const Card = styled(Link)`
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
   &:hover ${Icons} {
     opacity: 1;
   }
 `;
 
 export const Image = styled.img`
-  position: absolute;
   cursor: pointer;
 
   transition: opacity 1s;
   background-color: #fff;
 
-  height: 100%;
+  width: 100%;
   object-fit: cover;
   object-position: center;
+`;
 
-  border: 2px solid #000;
+export const UpperImage = styled(Image)`
+  &:hover {
+    opacity: 0;
+  }
+`;
+export const UnderImage = styled(Image)`
+  position: absolute;
+  z-index: -1;
 `;
 
 export const Info = styled.div`

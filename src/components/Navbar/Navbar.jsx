@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 const Container = styled.nav`
   background-color: #000;
@@ -16,7 +16,7 @@ const NavbarItems = styled.ul`
 
   height: 50px;
 
-  ${mobile({ flexDirection: 'column', alignItems: 'center', height: '100%' })}
+  ${mobile({ fontSize: '0.9rem' })}
 `;
 
 const NavbarItem = styled.li`
@@ -34,7 +34,7 @@ const NavbarItem = styled.li`
     color: #fdcc0d;
   }
 
-  ${mobile({ margin: '0.5rem' })}
+  ${mobile({ margin: '0.45rem' })}
 `;
 
 function Navbar() {
@@ -47,31 +47,33 @@ function Navbar() {
             style={(navState) =>
               navState.isActive
                 ? { color: '#fdcc0d', borderBottom: '2px solid #fdcc0d' }
-                : {}
+                : null
             }
           >
             Core Collection
           </NavLink>
         </NavbarItem>
+
         <NavbarItem>
           <NavLink
             to="/products/melting-rose"
             style={(navState) =>
               navState.isActive
                 ? { color: '#fdcc0d', borderBottom: '2px solid #fdcc0d' }
-                : {}
+                : null
             }
           >
             Melting Rose
           </NavLink>
         </NavbarItem>
+
         <NavbarItem>
           <NavLink
             to="/products/drone-repair-shop"
             style={(navState) =>
               navState.isActive
                 ? { color: '#fdcc0d', borderBottom: '2px solid #fdcc0d' }
-                : {}
+                : null
             }
           >
             Drone Repair Shop

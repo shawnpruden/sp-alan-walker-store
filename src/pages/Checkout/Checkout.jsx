@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleCart } from 'features/cartSlice';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { commerce } from 'lib/commerce';
+
 import { Box, CircularProgress, Step, StepLabel, Stepper } from '@mui/material';
 
-import { commerce } from '../../lib/commerce';
+import { Button, Container, SubTitle, Title, Wrapper } from './styles';
 
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 
-import { Button, Container, SubTitle, Title, Wrapper } from './styles';
-import { loader } from '../../styles';
+import { loader } from 'styles';
 import { Divider } from '../Cart/styles';
 
 const steps = ['Shipping', 'Payment', 'Confirmation'];
 
-function Checkout({ cart, onRefreshCart }) {
+function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
   const [token, setToken] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
+
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -82,7 +89,8 @@ function Checkout({ cart, onRefreshCart }) {
   const timeout = () => {
     setTimeout(() => {
       setIsCompleted(true);
-      onRefreshCart();
+
+      dispatch(handleCart({ type: 'refresh' }));
     }, 3000);
   };
 
@@ -90,6 +98,7 @@ function Checkout({ cart, onRefreshCart }) {
     switch (activeStep) {
       case 0:
         return <AddressForm token={token} nextStep={nextStep} />;
+
       case 1:
         return (
           <PaymentForm
@@ -99,8 +108,10 @@ function Checkout({ cart, onRefreshCart }) {
             timeout={timeout}
           />
         );
+
       case 2:
         return <Confirmation />;
+
       default:
         return null;
     }
@@ -110,6 +121,7 @@ function Checkout({ cart, onRefreshCart }) {
     <Container>
       <Wrapper>
         <Title>Checkout</Title>
+
         <Stepper activeStep={activeStep}>
           {steps.map((step, index) => (
             <Step key={index}>

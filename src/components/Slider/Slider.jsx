@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 import { ArrowBtn, Banner, Container, Image, Wrapper } from './styles';
 
-import BannerOne from '../../assets/img/banner-1.jpg';
-import BannerTwo from '../../assets/img/banner-2.jpg';
+import BannerOne from 'assets/img/banner-1.jpg';
+import BannerTwo from 'assets/img/banner-2.jpg';
 
 function Slider() {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -35,6 +36,8 @@ function Slider() {
       slideInterval.current = setInterval(() => {
         handleClick('right');
       }, 5000);
+
+    return () => clearInterval(slideInterval.current);
   }, [handleClick, width]);
 
   return (
@@ -42,6 +45,7 @@ function Slider() {
       <ArrowBtn direction="left" onClick={() => handleClick('left')}>
         <ArrowBackIosNewRoundedIcon />
       </ArrowBtn>
+
       <Wrapper slideIndex={slideIndex}>
         <Banner>
           <Image src={BannerOne} alt="banner" />
@@ -50,6 +54,7 @@ function Slider() {
           <Image src={BannerTwo} alt="banner" />
         </Banner>
       </Wrapper>
+
       <ArrowBtn direction="right" onClick={() => handleClick('right')}>
         <ArrowForwardIosRoundedIcon />
       </ArrowBtn>

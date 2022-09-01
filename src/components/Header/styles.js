@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 export const Container = styled.header`
   height: 150px;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 4rem;
 
   display: flex;
   justify-content: space-between;
@@ -30,7 +30,7 @@ export const SearchBar = styled.div`
   align-items: center;
   border: 1px solid #949494;
 
-  padding: 0.4rem;
+  padding: 0.4rem 0.8rem;
 
   transition: all 0.5s;
 
@@ -169,11 +169,6 @@ export const Logo = styled.img`
   padding: 0.5rem;
 
   transition: all 0.5s;
-
-  &:hover {
-    box-shadow: 0 0 15px #fdcc0d;
-    transform: scale(1.2);
-  }
 `;
 
 export const Right = styled.div`
@@ -197,9 +192,5 @@ export const HeaderLink = styled(Link)`
   transition: all 0.5s;
   &:hover {
     opacity: 0.8;
-  }
-
-  @media only screen and (max-width: 500px) {
-    display: ${(props) => (props.type === 'account' ? 'none' : 'block')};
   }
 `;

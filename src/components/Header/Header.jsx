@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Badge } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import {
@@ -27,13 +27,16 @@ import {
   SearchPanel,
 } from './styles';
 
-import logo from '../../assets/img/logo.png';
+import logo from 'assets/img/logo.png';
 
-function Header({ totalItems, products }) {
+function Header() {
   const [isFocused, setIsFocused] = useState(false);
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
   const [cursor, setCursor] = useState(true);
+
+  const { products } = useSelector((state) => state.products);
+  const { cart } = useSelector((state) => state.cart);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -74,7 +77,7 @@ function Header({ totalItems, products }) {
       return { border: '1px solid #fdcc0d', transform: 'translateY(0)' };
     } else if (isVisible) {
       return { transform: 'translateY(0)' };
-    } else return {};
+    } else return null;
   };
 
   return (
@@ -91,7 +94,9 @@ function Header({ totalItems, products }) {
               value={term}
               onChange={handleSearch}
             />
-            <SearchIcon style={isFocused ? { color: '#fdcc0d' } : {}} />
+
+            <SearchIcon style={isFocused ? { color: '#fdcc0d' } : null} />
+
             <SearchPanel
               style={
                 term && isFocused
@@ -100,7 +105,7 @@ function Header({ totalItems, products }) {
                       visibility: 'visible',
                       transform: 'translateY(0px)',
                     }
-                  : {}
+                  : null
               }
             >
               <List ref={listRef}>
@@ -120,11 +125,13 @@ function Header({ totalItems, products }) {
                           }
                         >
                           <Image src={result.image.url} />
+
                           <Info>
                             <Name>{result.name}</Name>
                             <Price>{result.price.formatted_with_symbol}</Price>
                           </Info>
                         </ListItem>
+
                         <Divider />
                       </Fragment>
                     ))}
@@ -135,21 +142,21 @@ function Header({ totalItems, products }) {
               </List>
             </SearchPanel>
           </SearchBar>
+
           <MSearchIcon ref={iconRef}>
             <SearchIcon />
           </MSearchIcon>
         </Left>
+
         <Center>
           <Link to="/">
             <Logo src={logo} alt="logo" />
           </Link>
         </Center>
+
         <Right>
-          <HeaderLink type="account" to="/account">
-            <AccountCircleIcon />
-          </HeaderLink>
           <HeaderLink to="/cart">
-            <Badge badgeContent={totalItems} color="error">
+            <Badge badgeContent={cart.total_items} color="error">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </HeaderLink>

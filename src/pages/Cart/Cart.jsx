@@ -1,10 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleCart } from 'features/cartSlice';
 
 import { Box, CircularProgress } from '@mui/material';
-
-import CartItem from './CartItem/CartItem';
-import { loader, miniLoader } from '../../styles';
 
 import {
   Button,
@@ -18,27 +17,31 @@ import {
   Title,
 } from './styles';
 
-function Cart({
-  cart,
-  cart: { line_items, subtotal },
-  onUpdateCartItem,
-  onRemoveCartItem,
-  onEmptyCart,
-}) {
-  const [isLoading, setIsLoading] = useState(false);
+import CartItem from './CartItem/CartItem';
+import { disabled, loader, miniLoader } from 'styles';
 
-  const handleEmptyCart = () => {
-    setIsLoading(true);
-    onEmptyCart();
-  };
+function Cart() {
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    cart: { line_items, subtotal },
+  } = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
-  }, [cart]);
+  }, [line_items]);
+
+  const handleEmptyCart = () => {
+    setIsLoading(true);
+
+    dispatch(handleCart({ type: 'empty' }));
+  };
 
   const EmptyCart = () => (
     <>
       <Title>There is no items in your shopping cart</Title>
+
       <Button as={Link} to="/">
         CONTINUE SHOPPING
       </Button>
@@ -48,29 +51,31 @@ function Cart({
   const FilledCart = () => (
     <>
       <Title>Your shopping cart</Title>
+
       <TextWrapper>
         <Text space="wider">Product</Text>
         <Text>Quantity</Text>
         <Text>Price</Text>
       </TextWrapper>
+
       <Divider />
 
       {line_items.map((item) => (
         <Fragment key={item.id}>
-          <CartItem
-            cart={cart}
-            item={item}
-            onUpdateCartItem={onUpdateCartItem}
-            onRemoveCartItem={onRemoveCartItem}
-          />
+          <CartItem item={item} />
           <Divider />
         </Fragment>
       ))}
 
       <CartDetails>
         <Subtotal>Subtotal: {subtotal.formatted_with_symbol}</Subtotal>
+
         <ButtonGroup>
-          <Button type="clear" onClick={handleEmptyCart}>
+          <Button
+            type="clear"
+            onClick={handleEmptyCart}
+            style={isLoading ? disabled : null}
+          >
             {isLoading ? (
               <Box sx={miniLoader}>
                 <CircularProgress size={25} sx={{ color: '#fff' }} />
@@ -79,6 +84,7 @@ function Cart({
               'CLEAR CART'
             )}
           </Button>
+
           <Button type="checkout" as={Link} to="/checkout">
             CHECK OUT
           </Button>
@@ -90,10 +96,10 @@ function Cart({
   return (
     <Container>
       {line_items ? (
-        !line_items.length ? (
-          <EmptyCart />
-        ) : (
+        !!line_items.length ? (
           <FilledCart />
+        ) : (
+          <EmptyCart />
         )
       ) : (
         <Box sx={loader}>

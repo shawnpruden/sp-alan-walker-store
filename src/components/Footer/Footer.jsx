@@ -39,36 +39,43 @@ function Footer() {
     <Container>
       <Menu>
         <Title>Menu</Title>
+
         <MenuList>
           {items.map((item, index) => (
             <MenuItem key={index}>{item}</MenuItem>
           ))}
         </MenuList>
       </Menu>
+
       <Wrapper>
         <Subscribe>
           <Label>Subscribe to our emails</Label>
+
           <InputContainer
-            style={isFocused ? { border: '2px solid #fdcc0d' } : {}}
+            style={isFocused ? { border: '2px solid #fdcc0d' } : null}
           >
             <Input
               placeholder="Email"
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
-            <ArrowForwardIcon style={isFocused ? { color: '#fdcc0d' } : {}} />
+            <ArrowForwardIcon style={isFocused ? { color: '#fdcc0d' } : null} />
           </InputContainer>
         </Subscribe>
+
         <SocialIcons>
           <SocialIcon>
             <TwitterIcon />
           </SocialIcon>
+
           <SocialIcon>
             <FacebookIcon />
           </SocialIcon>
+
           <SocialIcon>
             <InstagramIcon />
           </SocialIcon>
+
           <SocialIcon>
             <YouTubeIcon />
           </SocialIcon>

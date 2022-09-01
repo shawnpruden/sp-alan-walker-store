@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from '../../mobile';
+import { mobile } from 'mobile';
 
 export const Gallery = styled.div`
   display: grid;

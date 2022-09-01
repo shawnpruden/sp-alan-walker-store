@@ -19,6 +19,7 @@ function PaymentForm({ token, backStep, nextStep, timeout }) {
       <form onSubmit={handleSubmit}>
         <ButtonGroup>
           <Button onClick={backStep}>Back</Button>
+
           <Button type="submit">
             Pay {token.live.subtotal.formatted_with_symbol}
           </Button>
