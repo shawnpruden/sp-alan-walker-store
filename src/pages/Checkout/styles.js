@@ -9,7 +9,7 @@ export const Container = styled.section`
 
   padding: 3rem;
 
-  ${mobile({ padding: '2rem 1rem' })}
+  ${mobile({ padding: '2rem 0' })}
 `;
 
 export const Title = styled.h4`
@@ -17,9 +17,9 @@ export const Title = styled.h4`
   font-weight: normal;
   text-transform: uppercase;
 
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
-  ${mobile({ fontSize: '1.5rem', textAlign: 'center' })}
+  ${mobile({ fontSize: '1.8rem', textAlign: 'center' })}
 `;
 
 export const SubTitle = styled.h4`
@@ -44,7 +44,7 @@ export const Wrapper = styled.div`
     background-color: #000;
   }
 
-  ${mobile({ width: '100%', padding: '1rem 0.5rem' })}
+  ${mobile({ width: '100%', padding: '1rem', boxShadow: 'none' })}
 `;
 
 export const Form = styled.form`
@@ -66,6 +66,8 @@ export const Input = styled.input`
     outline: none;
     border: 2px solid #fdcc0d;
   }
+
+  ${mobile({ margin: '1rem 0 0 0' })}
 `;
 
 export const InputGroup = styled.div`
@@ -87,6 +89,8 @@ export const InputGroup = styled.div`
 
     pointer-events: none;
   }
+
+  ${mobile({ margin: '1rem 0 0 0' })}
 `;
 
 export const Label = styled.label`
