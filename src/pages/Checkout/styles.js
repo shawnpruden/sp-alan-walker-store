@@ -50,6 +50,8 @@ export const Wrapper = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+
+  ${mobile({ padding: '0 1rem' })}
 `;
 
 export const Input = styled.input`
