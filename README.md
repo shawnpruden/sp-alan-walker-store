@@ -1,6 +1,6 @@
 # [Alan Walker Store](https://alan-walker-store.netlify.app)
 
-This eCommerce project is a clone website of one of my favorite artist Alan Walker's [online store](https://store.alanwalker.com).
+This project is an eCommerce website clone of one of my favorite Electronic Artists — Alan Walker's [online store](https://store.alanwalker.com).
 
 ## Demo Images
 ### _▫️Smartphone_
