@@ -22,15 +22,13 @@ import { disabled, loader, miniLoader } from 'styles';
 
 function Cart() {
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    cart: { line_items, subtotal },
-  } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
-  }, [line_items]);
+  }, [cart?.line_items]);
 
   const handleEmptyCart = () => {
     setIsLoading(true);
@@ -60,7 +58,7 @@ function Cart() {
 
       <Divider />
 
-      {line_items.map((item) => (
+      {cart?.line_items.map((item) => (
         <Fragment key={item.id}>
           <CartItem item={item} />
           <Divider />
@@ -68,7 +66,7 @@ function Cart() {
       ))}
 
       <CartDetails>
-        <Subtotal>Subtotal: {subtotal.formatted_with_symbol}</Subtotal>
+        <Subtotal>Subtotal: {cart?.subtotal.formatted_with_symbol}</Subtotal>
 
         <ButtonGroup>
           <Button
@@ -95,8 +93,8 @@ function Cart() {
 
   return (
     <Container>
-      {line_items ? (
-        !!line_items.length ? (
+      {cart?.line_items ? (
+        !!cart?.line_items.length ? (
           <FilledCart />
         ) : (
           <EmptyCart />

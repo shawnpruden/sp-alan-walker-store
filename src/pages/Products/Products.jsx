@@ -35,7 +35,7 @@ function Products() {
 
   const { collection } = useParams();
 
-  const categorizedProducts = products.filter(
+  const categorizedProducts = products?.filter(
     (product) => product.categories[0].slug === collection
   );
 
@@ -73,7 +73,7 @@ function Products() {
       </Filters>
 
       <List>
-        {products.length ? (
+        {products?.length ? (
           sortedProducts.map(({ id, assets, name, price, variant_groups }) => (
             <ListItem key={id}>
               <Card to={`/products/${collection}/${id}`}>

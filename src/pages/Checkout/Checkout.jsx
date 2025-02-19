@@ -31,8 +31,8 @@ function Checkout() {
     const createToken = async () => {
       try {
         const token =
-          cart.id &&
-          (await commerce.checkout.generateToken(cart.id, {
+          cart?.id &&
+          (await commerce.checkout.generateToken(cart?.id, {
             type: 'cart',
           }));
 

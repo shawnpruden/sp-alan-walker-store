@@ -65,7 +65,7 @@ function Header() {
 
     e.target.value
       ? setResults(
-          products.filter((product) =>
+          products?.filter((product) =>
             product.name.toLowerCase().includes(e.target.value.toLowerCase())
           )
         )
@@ -109,7 +109,7 @@ function Header() {
               }
             >
               <List ref={listRef}>
-                {results.length ? (
+                {results?.length ? (
                   <>
                     {results.map((result) => (
                       <Fragment key={result.id}>
@@ -156,7 +156,7 @@ function Header() {
 
         <Right>
           <HeaderLink to="/cart">
-            <Badge badgeContent={cart.total_items} color="error">
+            <Badge badgeContent={cart?.total_items} color="error">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </HeaderLink>

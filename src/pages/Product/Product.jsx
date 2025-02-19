@@ -35,8 +35,8 @@ function Product() {
   const dispatch = useDispatch();
 
   const { productId } = useParams();
-  const { id, assets, name, price, variant_groups } = products.length
-    ? products.find((product) => product.id === productId)
+  const { id, assets, name, price, variant_groups } = products?.length
+    ? products?.find((product) => product.id === productId)
     : [];
 
   useEffect(() => {
@@ -44,12 +44,12 @@ function Product() {
   }, [cart]);
 
   useEffect(() => {
-    products.length &&
+    products?.length &&
       variant_groups.length &&
       setSize({
         [variant_groups[0].id]: variant_groups[0].options[0].id,
       });
-  }, [products.length, variant_groups]);
+  }, [products?.length, variant_groups]);
 
   const handleAddToCart = () => {
     setIsLoading(true);
@@ -61,7 +61,7 @@ function Product() {
 
   return (
     <>
-      {products.length ? (
+      {products?.length ? (
         <Container>
           <Left>
             <Image src={assets[0].url} alt={name} />
